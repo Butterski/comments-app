@@ -1,12 +1,30 @@
-.comments-container{
-    width: 100%;
+.reply-container{
+    display: flex;
+}
+.reply-comment-line-container{
+    width: 12%;
+    max-height: 100%;
+    display: flex;
+    justify-content: center;
+}
+.reply-comment-line{
+    width: 2px;
+    min-height: 100%;
+    height: inherit;
+    background: var(--gblue);
+    overflow: hidden;
+}
+
+
+.reply-comments-container{
+    width: 88%;
     background-color: var(--vlgray);
     display: flex;
     flex-direction: row;
     border-radius: 10px;
     padding: 10px;
     padding-block: 3%;
-    margin-block: 1rem;
+    margin-block: .5rem;
     align-self: center;
 }
 .left-comment-container{
@@ -81,10 +99,11 @@
     color: var(--lgrayblue);
 }
 
-.comment-container{
+.reply-comment-container{
     margin-top: 10px;
     margin-right: 10px;
     font-weight: 500;
+    width: 88%;
 }
 .right-reply-container{
     width: 92%;

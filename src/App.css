@@ -24,3 +24,6 @@
 .middle-container{
   width: 75%;
 }
+.flex{
+  display: flex;
+}

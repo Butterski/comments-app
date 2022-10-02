@@ -2,6 +2,7 @@ import { useState } from "react";
 import "./Comment.css";
 import { ReactComponent as IconMinus } from "../images/icon-minus.svg";
 import { ReactComponent as IconPlus } from "../images/icon-plus.svg";
+import ReplyComment from "./ReplyComment";
 
 const image = require("../images/avatars/image-ramsesmiron.png");
 
@@ -61,6 +62,9 @@ const Comment = () => {
           </div>
         </div>
       )}
+      <ReplyComment text={"zgadzam sie"}/>
+      <ReplyComment text={"?????"}/>
+      <ReplyComment />
     </>
   );
 };
