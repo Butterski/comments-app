@@ -1,38 +1,26 @@
+:root{
+  /* primary */
+  --mblue: hsl(238, 40%, 52%);
+  --sred: hsl(358, 79%, 66%);
+  --lgrayblue: hsl(239, 57%, 85%);
+  --pred: hsl(357, 100%, 86%);
+
+  /* neutral */
+  --dblue: hsl(212, 24%, 26%);
+  --gblue: hsl(211, 10%, 45%);
+  --lgray: hsl(223, 19%, 93%);
+  --vlgray: hsl(228, 33%, 97%);
+}
+
 .App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
   min-height: 100vh;
+  width: 100%;
+  background-color: var(--lgray);
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  color: black;
 }
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.middle-container{
+  width: 75%;
 }
