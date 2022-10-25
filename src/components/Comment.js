@@ -9,6 +9,13 @@ const image = require("../images/avatars/image-ramsesmiron.png");
 const Comment = () => {
   const [score, setScore] = useState(0);
   const [showReplyArea, setShowReplyArea] = useState(false);
+  const [replyArea, setReplyArea] = useState('')
+  const [replyMsg, setReplyMsg] = useState(['jeden', 'dwa', 'trzy']);
+
+  const addReply = (reply) =>{
+    setReplyMsg([...replyMsg, reply])
+  }
+
 
   return (
     <>
@@ -32,7 +39,7 @@ const Comment = () => {
               <div className="comment-time">miesiac temu</div>
             </div>
             <span className="comment-reply-button" onClick={()=> setShowReplyArea(!showReplyArea)}>
-              <span class="material-symbols-outlined">reply</span>
+              <span className="material-symbols-outlined">reply</span>
               &nbsp;Reply
             </span>
           </div>
@@ -57,14 +64,21 @@ const Comment = () => {
               cols="30"
               rows="5"
               className="reply-textarea"
+              value={replyArea}
+              onChange={e => {
+                  e.preventDefault();
+                  setReplyArea(e.target.value);
+              }}
             ></textarea>
-            <button className="reply-button">REPLY</button>
+            <button className="reply-button" onClick={()=> {addReply(replyArea); setReplyArea(''); setShowReplyArea(false)}}>REPLY</button>
           </div>
         </div>
       )}
-      <ReplyComment text={"zgadzam sie"}/>
-      <ReplyComment text={"?????"}/>
-      <ReplyComment />
+      {replyMsg.map(item => {
+        return(
+          <ReplyComment text={item} key={item}/>
+        )
+      })}
     </>
   );
 };
