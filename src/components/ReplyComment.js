@@ -2,12 +2,16 @@ import { useState } from "react";
 import "./ReplyComment.css";
 import { ReactComponent as IconMinus } from "../images/icon-minus.svg";
 import { ReactComponent as IconPlus } from "../images/icon-plus.svg";
+import DATA from '../data.json';
 
-const image = require("../images/avatars/image-ramsesmiron.png");
-
-const ReplyComment = ({ text }) => {
-  const [score, setScore] = useState(0);
+const ReplyComment = ({content, user, createdAt, replyingTo, cscore}) => {
+  const [score, setScore] = useState(cscore);
   const [showReplyArea, setShowReplyArea] = useState(false);
+  const currentUser = DATA.currentUser;
+  let imgName = ((user.image.png).split('/')).pop()
+  const image = require(`../images/avatars/${imgName}`);
+  let cimgName = ((currentUser.image.png).split('/')).pop()
+  const cimage = require(`../images/avatars/${cimgName}`);
 
   return (
     <>
@@ -35,8 +39,8 @@ const ReplyComment = ({ text }) => {
                   alt="avatar"
                   className="comment-author-image"
                 />
-                <div className="comment-author">adam mickiewicz</div>
-                <div className="comment-time">miesiac temu</div>
+                <div className="comment-author">{user.username}</div>
+                <div className="comment-time">{createdAt}</div>
               </div>
               <span
                 className="comment-reply-button"
@@ -47,7 +51,7 @@ const ReplyComment = ({ text }) => {
               </span>
             </div>
             <div className="comment-container">
-              {text}
+              <b>@{replyingTo + ' '}</b>{content}
             </div>
           </div>
         </div>
@@ -59,7 +63,7 @@ const ReplyComment = ({ text }) => {
           </div>
           <div className="reply-comments-container">
             <div className="left-comment-container">
-              <img src={image} alt="avatar" height="40px" />
+              <img src={cimage} alt="avatar" height="40px" />
             </div>
             <div className="right-reply-container">
               <textarea

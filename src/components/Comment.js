@@ -3,19 +3,25 @@ import "./Comment.css";
 import { ReactComponent as IconMinus } from "../images/icon-minus.svg";
 import { ReactComponent as IconPlus } from "../images/icon-plus.svg";
 import ReplyComment from "./ReplyComment";
+import DATA from '../data.json';
 
-const image = require("../images/avatars/image-ramsesmiron.png");
 
-const Comment = () => {
-  const [score, setScore] = useState(0);
+const Comment = ({content, user, createdAt, replies, cscore}) => {
+  const [score, setScore] = useState(parseInt(cscore));
   const [showReplyArea, setShowReplyArea] = useState(false);
   const [replyArea, setReplyArea] = useState('')
   const [replyMsg, setReplyMsg] = useState(['jeden', 'dwa', 'trzy']);
+  const currentUser = DATA.currentUser;
+  let cimgName = ((currentUser.image.png).split('/')).pop()
+  const cimage = require(`../images/avatars/${cimgName}`);
+  let imgName = ((user.image.png).split('/')).pop()
+  const image = require(`../images/avatars/${imgName}`);
 
+  
   const addReply = (reply) =>{
     setReplyMsg([...replyMsg, reply])
   }
-
+  console.log(replies)
 
   return (
     <>
@@ -35,8 +41,8 @@ const Comment = () => {
           <div className="upper-comment">
             <div className="left-upper-comment">
               <img src={image} alt="avatar" className="comment-author-image" />
-              <div className="comment-author">adam mickiewicz</div>
-              <div className="comment-time">miesiac temu</div>
+              <div className="comment-author">{user.username}</div>
+              <div className="comment-time">{createdAt}</div>
             </div>
             <span className="comment-reply-button" onClick={()=> setShowReplyArea(!showReplyArea)}>
               <span className="material-symbols-outlined">reply</span>
@@ -44,10 +50,7 @@ const Comment = () => {
             </span>
           </div>
           <div className="comment-container">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere,
-            dolorem perspiciatis. Cum nam sit placeat, corrupti aspernatur
-            reiciendis ipsam beatae asperiores libero non a adipisci obcaecati,
-            perspiciatis nemo illum ea?
+            {content}
           </div>
         </div>
       </div>
@@ -55,7 +58,7 @@ const Comment = () => {
       {showReplyArea && (
         <div className="comments-container">
           <div className="left-comment-container">
-            <img src={image} alt="avatar" height="40px" />
+            <img src={cimage} alt="avatar" height="40px" />
           </div>
           <div className="right-reply-container">
             <textarea
@@ -74,9 +77,9 @@ const Comment = () => {
           </div>
         </div>
       )}
-      {replyMsg.map(item => {
+      {replies.map((reply, key) => {
         return(
-          <ReplyComment text={item} key={item}/>
+          <ReplyComment content={reply.content} createdAt={reply.createdAt} replyingTo={reply.replyingTo} cscore={reply.score} user={reply.user} key={key}/>
         )
       })}
     </>
